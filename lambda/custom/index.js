@@ -36,7 +36,8 @@ const DifficultyHandler = {
     attributes.difficulty = difficulty;
     handlerInput.attributesManager.setSessionAttributes(attributes);
     return handlerInput.responseBuilder
-      .speak("You have chosen difficulty " + difficulty + ". Let me choose a random category for you. I have chosen math. The question is What is five minus three?")
+      .speak("You have chosen difficulty " + difficulty + ". Let me choose a random category for you. "+WAITING_SOUND+
+      "I have chosen math."+ WAITING_SOUND2+"The question is: What is five minus three?")
       .reprompt(HELP_REPROMPT)
       .getResponse();
   },
@@ -62,9 +63,9 @@ const AnswerHandler = {
     var reply = "";
     console.log("created reply");
     if (correct) {
-      reply = "You answered correctly!";
+      reply = CORRECT_ANSWER_SOUND + "You answered correctly!";
     } else {
-      reply = "Incorrect answer!";
+      reply = INCORRECT_ANSWER_SOUND + "Incorrect answer!";
     }
     console.log(reply);
     return handlerInput.responseBuilder
@@ -201,8 +202,12 @@ const ErrorHandler = {
 const DIFFICULTY_MESSAGE = "What level of difficulty would you like? Please say easy medium or hard";
 const GREETING = "Hello"
 const SKILL_NAME = "STEM party";
-const WELCOME_MESSAGE = " Welcome to STEM party!. What is your name?";
-const GAME_SOUND1 = "<audio src='soundbank://soundlibrary/ui/gameshow/amzn_ui_sfx_gameshow_player1_01'/>";
+const WELCOME_MESSAGE = " Welcome to STEM party! It is great that you want to learn more about science, tech, engineering and math. What is your name?";
+const GAME_SOUND1 = "<audio src='soundbank://soundlibrary/ui/gameshow/amzn_ui_sfx_gameshow_intro_01'/>";
+const WAITING_SOUND2 = "<audio src='soundbank://soundlibrary/ui/gameshow/amzn_ui_sfx_gameshow_neutral_response_03'/>";
+const WAITING_SOUND = "<audio src='soundbank://soundlibrary/foley/amzn_sfx_clock_ticking_01'/>";
+const CORRECT_ANSWER_SOUND = "<audio src='soundbank://soundlibrary/ui/gameshow/amzn_ui_sfx_gameshow_tally_positive_01'/>";
+const INCORRECT_ANSWER_SOUND = "<audio src='soundbank://soundlibrary/ui/gameshow/amzn_ui_sfx_gameshow_tally_negative_01'/>";
 const HELP_MESSAGE = "You can start your daily game, or check how you compare with your friends... ¿How can I help?";
 const HELP_REPROMPT = "How can I help?";
 const CORRECT_ANSWER = "Correct!";

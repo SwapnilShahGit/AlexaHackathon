@@ -45,7 +45,7 @@
                         }
                     ],
                     "samples": [
-                        "I want {difficulty} questions"
+                        "I want {difficulty}"
                     ]
                 },
                 {
