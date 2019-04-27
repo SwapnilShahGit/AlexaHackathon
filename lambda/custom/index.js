@@ -63,9 +63,73 @@ const AnswerHandler = {
     var reply = "";
     console.log("created reply");
     if (correct) {
-      reply = CORRECT_ANSWER_SOUND + "You answered correctly!";
+      reply = CORRECT_ANSWER_SOUND + "You answered correctly! "+WAITING_SOUND2+"The next question is: " + SECOND_QUESTION;
     } else {
-      reply = INCORRECT_ANSWER_SOUND + "Incorrect answer!";
+      reply = INCORRECT_ANSWER_SOUND + "Incorrect answer! Try again";
+    }
+    console.log(reply);
+    return handlerInput.responseBuilder
+      .speak(reply)
+      .reprompt(HELP_REPROMPT)
+      .getResponse();
+  },
+};
+
+const Answer2Handler = {
+  canHandle(handlerInput) {
+    const request = handlerInput.requestEnvelope.request;
+    return request.type === 'IntentRequest'
+      && request.intent.name === 'AnswerTwoIntent';
+  },
+  handle(handlerInput) {
+    console.log("In answer2 handler");
+    const request = handlerInput.requestEnvelope.request;
+    var answer = request.intent.slots.answer.value;
+    const attributes = handlerInput.attributesManager.getSessionAttributes();
+    var correct = false;
+    console.log(answer);
+    if (answer == "false") {
+      console.log("answer is correct");
+      correct = true;
+    }
+    var reply = "";
+    console.log("created reply");
+    if (correct) {
+      reply = CORRECT_ANSWER_SOUND + "You answered correctly! "+WAITING_SOUND2+"The next question is: " + THIRD_QUESTION;
+    } else {
+      reply = INCORRECT_ANSWER_SOUND + "Incorrect answer! Since this is true or false, I will not let you try again. The next question is: " + WAITING_SOUND2 + THIRD_QUESTION;
+    }
+    console.log(reply);
+    return handlerInput.responseBuilder
+      .speak(reply)
+      .reprompt(HELP_REPROMPT)
+      .getResponse();
+  },
+};
+
+const Answer3Handler = {
+  canHandle(handlerInput) {
+    const request = handlerInput.requestEnvelope.request;
+    return request.type === 'IntentRequest'
+      && request.intent.name === 'AnswerThreeIntent';
+  },
+  handle(handlerInput) {
+    console.log("In answer3 handler");
+    const request = handlerInput.requestEnvelope.request;
+    var answer = request.intent.slots.answer.value;
+    const attributes = handlerInput.attributesManager.getSessionAttributes();
+    var correct = false;
+    console.log(answer);
+    if (answer == "yellow") {
+      console.log("answer is correct");
+      correct = true;
+    }
+    var reply = "";
+    console.log("created reply");
+    if (correct) {
+      reply = CORRECT_ANSWER_SOUND + "You answered correctly! Thanks for playing!" + EXIT_SOUND;
+    } else {
+      reply = INCORRECT_ANSWER_SOUND + "Incorrect answer! Please try again";
     }
     console.log(reply);
     return handlerInput.responseBuilder
@@ -203,11 +267,14 @@ const DIFFICULTY_MESSAGE = "What level of difficulty would you like? Please say 
 const GREETING = "Hello"
 const SKILL_NAME = "STEM party";
 const WELCOME_MESSAGE = " Welcome to STEM party! It is great that you want to learn more about science, tech, engineering and math. What is your name?";
+const SECOND_QUESTION = "True or False, six plus eight is fifteen.";
+const THIRD_QUESTION = "Please complete the pattern: blue, orange, yellow. blue, orange, yellow. blue, orange and then?";
 const GAME_SOUND1 = "<audio src='soundbank://soundlibrary/ui/gameshow/amzn_ui_sfx_gameshow_intro_01'/>";
 const WAITING_SOUND2 = "<audio src='soundbank://soundlibrary/ui/gameshow/amzn_ui_sfx_gameshow_neutral_response_03'/>";
 const WAITING_SOUND = "<audio src='soundbank://soundlibrary/foley/amzn_sfx_clock_ticking_01'/>";
 const CORRECT_ANSWER_SOUND = "<audio src='soundbank://soundlibrary/ui/gameshow/amzn_ui_sfx_gameshow_tally_positive_01'/>";
 const INCORRECT_ANSWER_SOUND = "<audio src='soundbank://soundlibrary/ui/gameshow/amzn_ui_sfx_gameshow_tally_negative_01'/>";
+const EXIT_SOUND = "<audio src='soundbank://soundlibrary/ui/gameshow/amzn_ui_sfx_gameshow_outro_01'/>";
 const HELP_MESSAGE = "You can start your daily game, or check how you compare with your friends... ¿How can I help?";
 const HELP_REPROMPT = "How can I help?";
 const CORRECT_ANSWER = "Correct!";
@@ -222,6 +289,8 @@ exports.handler = skillBuilder
   .addRequestHandlers(
     LaunchRequestHandler,
     AnswerHandler,
+    Answer2Handler,
+    Answer3Handler,
     NameHandler,
     DifficultyHandler,
     DailyGameHandler,

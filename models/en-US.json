@@ -37,6 +37,30 @@
                     ]
                 },
                 {
+                    "name": "AnswerTwoIntent",
+                    "slots": [
+                        {
+                            "name": "answer",
+                            "type": "answer"
+                        }
+                    ],
+                    "samples": [
+                        "My answer is {answer}"
+                    ]
+                },
+                {
+                    "name": "AnswerThreeIntent",
+                    "slots": [
+                        {
+                            "name": "answer",
+                            "type": "answer"
+                        }
+                    ],
+                    "samples": [
+                        "The color is {answer}"
+                    ]
+                },
+                {
                     "name": "DifficultyIntent",
                     "slots": [
                         {
@@ -85,6 +109,21 @@
                 {
                     "name": "answer",
                     "values": [
+                        {
+                            "name": {
+                                "value": "yellow"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "false"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "true"
+                            }
+                        },
                         {
                             "name": {
                                 "value": "two"
