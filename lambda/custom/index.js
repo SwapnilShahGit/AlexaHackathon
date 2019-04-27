@@ -63,7 +63,7 @@ const AnswerHandler = {
     var reply = "";
     console.log("created reply");
     if (correct) {
-      reply = CORRECT_ANSWER_SOUND + "You answered correctly! "+WAITING_SOUND2+"The next question is: " + SECOND_QUESTION;
+      reply = CORRECT_ANSWER_SOUND + CORRECT_ANSWER_YIPPEE + " You answered correctly! "+WAITING_SOUND2+"The next question is: " + SECOND_QUESTION;
     } else {
       reply = INCORRECT_ANSWER_SOUND + "Incorrect answer! Try again";
     }
@@ -97,7 +97,7 @@ const Answer2Handler = {
     if (correct) {
       reply = CORRECT_ANSWER_SOUND + "You answered correctly! "+WAITING_SOUND2+"The next question is: " + THIRD_QUESTION;
     } else {
-      reply = INCORRECT_ANSWER_SOUND + "Incorrect answer! Since this is true or false, I will not let you try again. The next question is: " + WAITING_SOUND2 + THIRD_QUESTION;
+      reply = INCORRECT_ANSWER_SOUND + INCORRECT_ANSWER_MAN + " Incorrect answer! Eight plus six is fourteen. The next question is: " + WAITING_SOUND2 + THIRD_QUESTION;
     }
     console.log(reply);
     return handlerInput.responseBuilder
@@ -127,14 +127,13 @@ const Answer3Handler = {
     var reply = "";
     console.log("created reply");
     if (correct) {
-      reply = CORRECT_ANSWER_SOUND + "You answered correctly! Thanks for playing!" + EXIT_SOUND;
+      reply = CORRECT_ANSWER_SOUND + CORRECT_ANSWER_EUREKA+" You answered correctly! You've gotten two of the three questions correct. Thanks for playing!" + EXIT_SOUND;
     } else {
       reply = INCORRECT_ANSWER_SOUND + "Incorrect answer! Please try again";
     }
     console.log(reply);
     return handlerInput.responseBuilder
       .speak(reply)
-      .reprompt(HELP_REPROMPT)
       .getResponse();
   },
 };
@@ -273,6 +272,9 @@ const GAME_SOUND1 = "<audio src='soundbank://soundlibrary/ui/gameshow/amzn_ui_sf
 const WAITING_SOUND2 = "<audio src='soundbank://soundlibrary/ui/gameshow/amzn_ui_sfx_gameshow_neutral_response_03'/>";
 const WAITING_SOUND = "<audio src='soundbank://soundlibrary/foley/amzn_sfx_clock_ticking_01'/>";
 const CORRECT_ANSWER_SOUND = "<audio src='soundbank://soundlibrary/ui/gameshow/amzn_ui_sfx_gameshow_tally_positive_01'/>";
+const CORRECT_ANSWER_YIPPEE = "<say-as interpret-as='interjection'>yippee!</say-as>";
+const INCORRECT_ANSWER_MAN = "<say-as interpret-as='interjection'>aw man!</say-as>";
+const CORRECT_ANSWER_EUREKA = "<say-as interpret-as='interjection'>eureka!</say-as>";
 const INCORRECT_ANSWER_SOUND = "<audio src='soundbank://soundlibrary/ui/gameshow/amzn_ui_sfx_gameshow_tally_negative_01'/>";
 const EXIT_SOUND = "<audio src='soundbank://soundlibrary/ui/gameshow/amzn_ui_sfx_gameshow_outro_01'/>";
 const HELP_MESSAGE = "You can start your daily game, or check how you compare with your friends... ¿How can I help?";
